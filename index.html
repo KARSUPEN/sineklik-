@@ -1,1 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KARSU PEN</title>
 
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f2f2f2;
+margin:0;
+padding:20px;
+}
+
+.kutu{
+max-width:450px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:10px;
+font-size:18px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+font-size:20px;
+background:#007AFF;
+color:white;
+border:none;
+border-radius:10px;
+}
+
+.satir{
+display:flex;
+justify-content:space-between;
+padding:8px 0;
+border-bottom:1px solid #ddd;
+font-size:18px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="kutu">
+
+<h1>KARSU PEN</h1>
+
+<input id="en" placeholder="En">
+
+<input id="boy" placeholder="Boy">
+
+<button onclick="hesapla()">
+
+HESAPLA
+
+</button>
+
+<div class="satir"><b>Kanat</b><span id="kanat">0</span></div>
+
+<div class="satir"><b>Tül</b><span id="tul">0</span></div>
+
+<div class="satir"><b>Tepe</b><span id="tepe">0</span></div>
+
+<div class="satir"><b>En-80</b><span id="en80">0</span></div>
+
+<div class="satir"><b>Boy-80</b><span id="boy80">0</span></div>
+
+<div class="satir"><b>İp</b><span id="ip">0</span></div>
+
+<div class="satir"><b>İp x2</b><span id="ip2">0</span></div>
+
+</div>
+
+<script>
+
+function hesapla(){
+
+let en=parseFloat(document.getElementById("en").value)||0;
+
+let boy=parseFloat(document.getElementById("boy").value)||0;
+
+document.getElementById("kanat").innerHTML=boy-80;
+
+document.getElementById("tul").innerHTML=boy-65;
+
+document.getElementById("tepe").innerHTML=(en/30).toFixed(2);
+
+document.getElementById("en80").innerHTML=en-80;
+
+document.getElementById("boy80").innerHTML=boy-80;
+
+document.getElementById("ip").innerHTML=en+boy;
+
+document.getElementById("ip2").innerHTML=(en+boy)*2;
+
+}
+
+</script>
+
+</body>
+
+</html>
