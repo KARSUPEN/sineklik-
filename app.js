@@ -51,3 +51,34 @@ async function pdfOlustur(){
     pdf.save("KARSU_PEN.pdf");
 
 }
+function siparisKaydet(){
+
+const siparis = {
+
+musteri:document.getElementById("musteri").value,
+telefon:document.getElementById("telefon").value,
+adres:document.getElementById("adres").value,
+renk:document.getElementById("renk").value,
+adet:document.getElementById("adet").value,
+en:document.getElementById("en").value,
+boy:document.getElementById("boy").value,
+yatay:document.getElementById("yatay").innerText,
+dikey:document.getElementById("dikey").innerText,
+kanat:document.getElementById("kanat").innerText,
+tul:document.getElementById("tul").innerText,
+tepe:document.getElementById("tepe").innerText,
+ip:document.getElementById("ip").innerText,
+ip2:document.getElementById("ip2").innerText,
+takoz:"33"
+
+};
+
+let liste = JSON.parse(localStorage.getItem("siparisler")) || [];
+
+liste.push(siparis);
+
+localStorage.setItem("siparisler",JSON.stringify(liste));
+
+alert("Sipariş Kaydedildi.");
+
+}
