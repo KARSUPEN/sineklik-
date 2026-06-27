@@ -3,108 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>KARSU PEN</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
-}
+<link rel="stylesheet" href="style.css">
 
-body{
-background:#e9ecef;
-padding:20px;
-}
-
-.container{
-max-width:500px;
-margin:auto;
-background:#fff;
-border-radius:12px;
-padding:20px;
-box-shadow:0 0 15px rgba(0,0,0,.15);
-}
-
-h1{
-text-align:center;
-margin-bottom:20px;
-color:#1f2937;
-}
-
-label{
-display:block;
-margin-top:12px;
-font-weight:bold;
-}
-
-input{
-width:100%;
-padding:12px;
-font-size:17px;
-margin-top:5px;
-border:1px solid #ccc;
-border-radius:8px;
-}
-
-button{
-width:100%;
-padding:14px;
-margin-top:18px;
-background:#1565c0;
-color:#fff;
-border:none;
-border-radius:8px;
-font-size:18px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0d47a1;
-}
-
-.result{
-margin-top:20px;
-border:1px solid #ddd;
-border-radius:8px;
-overflow:hidden;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-padding:12px;
-border-bottom:1px solid #eee;
-}
-
-.row:last-child{
-border-bottom:none;
-}
-
-.title{
-font-weight:bold;
-}
-
-#kesim{
-margin-top:25px;
-display:none;
-}
-
-#kesim h2{
-margin-bottom:10px;
-font-size:20px;
-}
-
-.kesimSatir{
-display:flex;
-justify-content:space-between;
-padding:10px;
-background:#f7f7f7;
-margin-bottom:5px;
-border-radius:6px;
-}
-</style>
 </head>
 
 <body>
@@ -112,12 +15,27 @@ border-radius:6px;
 <div class="container">
 
 <h1>KARSU PEN</h1>
+<h3>Pileli Sineklik Hesaplama</h3>
 
 <label>Müşteri Adı</label>
-<input id="musteri">
+<input id="musteri" type="text">
 
 <label>Telefon</label>
-<input id="telefon">
+<input id="telefon" type="tel">
+
+<label>Adres</label>
+<input id="adres" type="text">
+
+<label>Renk</label>
+<select id="renk">
+<option>Beyaz</option>
+<option>Antrasit</option>
+<option>Meşe</option>
+<option>Siyah</option>
+</select>
+
+<label>Adet</label>
+<input id="adet" type="number" value="1">
 
 <label>Net En (mm)</label>
 <input id="en" type="number">
@@ -125,107 +43,40 @@ border-radius:6px;
 <label>Net Boy (mm)</label>
 <input id="boy" type="number">
 
-<button onclick="hesapla()">HESAPLA</button>
+<button onclick="hesapla()">
+HESAPLA
+</button>
 
-<div class="result">
+<div id="sonuc">
 
-<div class="row">
-<div class="title">Kanat</div>
-<div id="kanat">0</div>
-</div>
+<table>
 
-<div class="row">
-<div class="title">Tül</div>
-<div id="tul">0</div>
-</div>
+<tr>
+<th>Parça</th>
+<th>Sonuç</th>
+</tr>
 
-<div class="row">
-<div class="title">Tepe</div>
-<div id="tepe">0</div>
-</div>
+<tr>
+<td>Yatay</td>
+<td id="yatay"></td>
+</tr>
 
-<div class="row">
-<div class="title">En - 80</div>
-<div id="en80">0</div>
-</div>
+<tr>
+<td>Dikey</td>
+<td id="dikey"></td>
+</tr>
 
-<div class="row">
-<div class="title">Boy - 80</div>
-<div id="boy80">0</div>
-</div>
+<tr>
+<td>Kanat</td>
+<td id="kanat"></td>
+</tr>
 
-<div class="row">
-<div class="title">İp</div>
-<div id="ip">0</div>
-</div>
+<tr>
+<td>Tül</td>
+<td id="tul"></td>
+</tr>
 
-<div class="row">
-<div class="title">İp x2</div>
-<div id="ip2">0</div>
-</div>
-
-</div>
-
-<div id="kesim">
-
-<h2>KESİM LİSTESİ</h2>
-
-<div class="kesimSatir">
-<div>YATAY</div>
-<div id="yatay"></div>
-</div>
-
-<div class="kesimSatir">
-<div>DİKEY</div>
-<div id="dikey"></div>
-</div>
-
-<div class="kesimSatir">
-<div>KANAT</div>
-<div id="kKanat"></div>
-</div>
-
-<div class="kesimSatir">
-<div>TÜL</div>
-<div id="kTul"></div>
-</div>
-
-<div class="kesimSatir">
-<div>TEPE</div>
-<div id="kTepe"></div>
-</div>
-
-</div>
-
-<script>
-
-function hesapla(){
-
-const en=Number(document.getElementById("en").value);
-const boy=Number(document.getElementById("boy").value);
-
-const en80=en-80;
-const boy80=boy-80;
-
-document.getElementById("kanat").innerText=boy80+" mm";
-document.getElementById("tul").innerText=(boy-65)+" mm";
-document.getElementById("tepe").innerText=(en/30).toFixed(2);
-document.getElementById("en80").innerText=en80+" mm";
-document.getElementById("boy80").innerText=boy80+" mm";
-document.getElementById("ip").innerText=(en+boy)+" mm";
-document.getElementById("ip2").innerText=((en+boy)*2)+" mm";
-
-document.getElementById("yatay").innerText="2 × "+en80+" mm";
-document.getElementById("dikey").innerText="2 × "+boy80+" mm";
-document.getElementById("kKanat").innerText="1 × "+boy80+" mm";
-document.getElementById("kTul").innerText="1 × "+(boy-65)+" mm";
-document.getElementById("kTepe").innerText="3 × "+Math.floor(en/3)+" mm";
-
-document.getElementById("kesim").style.display="block";
-
-}
-
-</script>
-
-</body>
-</html>
+<tr>
+<td>Tepe</td>
+<td id="tepe"></td>
+</tr>
