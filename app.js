@@ -82,3 +82,35 @@ localStorage.setItem("siparisler",JSON.stringify(liste));
 alert("Sipariş Kaydedildi.");
 
 }
+function siparisleriGoster(){
+
+let liste = JSON.parse(localStorage.getItem("siparisler")) || [];
+
+let alan = document.getElementById("liste");
+
+alan.innerHTML = "";
+
+liste.forEach((s,i)=>{
+
+alan.innerHTML += `
+<div style="border:1px solid #ddd;padding:10px;margin:10px 0;border-radius:8px;">
+<b>${s.musteri}</b><br>
+${s.telefon}<br>
+${s.en} x ${s.boy}<br>
+${s.renk}<br><br>
+
+<button onclick="siparisSil(${i})">
+Sil
+</button>
+
+</div>
+`;
+
+});
+
+}
+window.onload = function(){
+
+siparisleriGoster();
+
+}
