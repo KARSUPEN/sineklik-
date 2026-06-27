@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -80,3 +81,62 @@ HESAPLA
 <td>Tepe</td>
 <td id="tepe"></td>
 </tr>
+<tr>
+<td>İp</td>
+<td id="ip"></td>
+</tr>
+
+<tr>
+<td>İp x2</td>
+<td id="ip2"></td>
+</tr>
+
+<tr>
+<td>Takoz</td>
+<td id="takoz"></td>
+</tr>
+
+</table>
+
+<br>
+
+<button class="altButon" onclick="pdfOlustur()">
+PDF OLUŞTUR
+</button>
+
+<button class="paylas" onclick="paylas()">
+PAYLAŞ
+</button>
+
+<button onclick="siparisKaydet()">
+SİPARİŞİ KAYDET
+</button>
+
+</div>
+
+<h2 style="margin-top:30px;">Kayıtlı Siparişler</h2>
+
+<div id="liste">
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script> 
+
+function pdfOlustur(){
+alert("PDF özelliği bir sonraki sürümde aktif olacak.");
+}
+
+function paylas(){
+alert("Paylaş özelliği bir sonraki sürümde aktif olacak.");
+}
+
+function siparisKaydet(){
+alert("Sipariş kaydetme özelliği bir sonraki sürümde aktif olacak.");
+}
+</script>
+
+</body>
+</html>
