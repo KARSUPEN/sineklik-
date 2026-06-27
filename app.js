@@ -24,3 +24,30 @@ function hesapla() {
     document.getElementById("sonuc").style.display = "block";
 
 }
+async function pdfOlustur(){
+
+    const { jsPDF } = window.jspdf;
+
+    const pdf = new jsPDF();
+
+    pdf.setFontSize(20);
+    pdf.text("KARSU PEN",20,20);
+
+    pdf.setFontSize(12);
+
+    pdf.text("Müşteri : " + document.getElementById("musteri").value,20,40);
+    pdf.text("Telefon : " + document.getElementById("telefon").value,20,50);
+    pdf.text("Adres : " + document.getElementById("adres").value,20,60);
+
+    pdf.text("Yatay : " + document.getElementById("yatay").innerText,20,80);
+    pdf.text("Dikey : " + document.getElementById("dikey").innerText,20,90);
+    pdf.text("Kanat : " + document.getElementById("kanat").innerText,20,100);
+    pdf.text("Tül : " + document.getElementById("tul").innerText,20,110);
+    pdf.text("Tepe : " + document.getElementById("tepe").innerText,20,120);
+    pdf.text("İp : " + document.getElementById("ip").innerText,20,130);
+    pdf.text("İp x2 : " + document.getElementById("ip2").innerText,20,140);
+    pdf.text("Takoz : 33",20,150);
+
+    pdf.save("KARSU_PEN.pdf");
+
+}
