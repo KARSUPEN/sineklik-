@@ -80,7 +80,7 @@ liste.push(siparis);
 localStorage.setItem("siparisler",JSON.stringify(liste));
 
 alert("Sipariş Kaydedildi.");
-
+siparisleriGoster();
 }
 function siparisleriGoster(){
 
@@ -110,6 +110,33 @@ Sil
 
 }
 window.onload = function(){
+
+siparisleriGoster();
+
+}
+function paylas(){
+
+if(navigator.share){
+
+navigator.share({
+title:"KARSU PEN",
+text:"Pileli Sineklik Hesabı"
+});
+
+}else{
+
+alert("Bu cihaz paylaşmayı desteklemiyor.");
+
+}
+
+}
+function siparisSil(index){
+
+let liste = JSON.parse(localStorage.getItem("siparisler")) || [];
+
+liste.splice(index,1);
+
+localStorage.setItem("siparisler",JSON.stringify(liste));
 
 siparisleriGoster();
 
