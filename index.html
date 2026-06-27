@@ -6,85 +6,194 @@
 <title>KARSU PEN</title>
 
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#f2f2f2;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#e9ecef;
 padding:20px;
 }
 
-.kutu{
-max-width:450px;
+.container{
+max-width:500px;
 margin:auto;
-background:white;
-padding:20px;
+background:#fff;
 border-radius:12px;
-box-shadow:0 0 10px rgba(0,0,0,.2);
+padding:20px;
+box-shadow:0 0 15px rgba(0,0,0,.15);
 }
 
 h1{
 text-align:center;
+margin-bottom:20px;
+color:#1f2937;
+}
+
+label{
+display:block;
+margin-top:12px;
+font-weight:bold;
 }
 
 input{
 width:100%;
 padding:12px;
-margin-top:10px;
-font-size:18px;
-box-sizing:border-box;
+font-size:17px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
 }
 
 button{
 width:100%;
-padding:15px;
-margin-top:15px;
-font-size:20px;
-background:#007AFF;
-color:white;
+padding:14px;
+margin-top:18px;
+background:#1565c0;
+color:#fff;
 border:none;
-border-radius:10px;
+border-radius:8px;
+font-size:18px;
+cursor:pointer;
 }
 
-.satir{
+button:hover{
+background:#0d47a1;
+}
+
+.result{
+margin-top:20px;
+border:1px solid #ddd;
+border-radius:8px;
+overflow:hidden;
+}
+
+.row{
 display:flex;
 justify-content:space-between;
-padding:8px 0;
-border-bottom:1px solid #ddd;
-font-size:18px;
+padding:12px;
+border-bottom:1px solid #eee;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.title{
+font-weight:bold;
+}
+
+#kesim{
+margin-top:25px;
+display:none;
+}
+
+#kesim h2{
+margin-bottom:10px;
+font-size:20px;
+}
+
+.kesimSatir{
+display:flex;
+justify-content:space-between;
+padding:10px;
+background:#f7f7f7;
+margin-bottom:5px;
+border-radius:6px;
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="kutu">
+<div class="container">
 
 <h1>KARSU PEN</h1>
 
-<input id="en" placeholder="En">
+<label>Müşteri Adı</label>
+<input id="musteri">
 
-<input id="boy" placeholder="Boy">
+<label>Telefon</label>
+<input id="telefon">
 
-<button onclick="hesapla()">
+<label>Net En (mm)</label>
+<input id="en" type="number">
 
-HESAPLA
+<label>Net Boy (mm)</label>
+<input id="boy" type="number">
 
-</button>
+<button onclick="hesapla()">HESAPLA</button>
 
-<div class="satir"><b>Kanat</b><span id="kanat">0</span></div>
+<div class="result">
 
-<div class="satir"><b>Tül</b><span id="tul">0</span></div>
+<div class="row">
+<div class="title">Kanat</div>
+<div id="kanat">0</div>
+</div>
 
-<div class="satir"><b>Tepe</b><span id="tepe">0</span></div>
+<div class="row">
+<div class="title">Tül</div>
+<div id="tul">0</div>
+</div>
 
-<div class="satir"><b>En-80</b><span id="en80">0</span></div>
+<div class="row">
+<div class="title">Tepe</div>
+<div id="tepe">0</div>
+</div>
 
-<div class="satir"><b>Boy-80</b><span id="boy80">0</span></div>
+<div class="row">
+<div class="title">En - 80</div>
+<div id="en80">0</div>
+</div>
 
-<div class="satir"><b>İp</b><span id="ip">0</span></div>
+<div class="row">
+<div class="title">Boy - 80</div>
+<div id="boy80">0</div>
+</div>
 
-<div class="satir"><b>İp x2</b><span id="ip2">0</span></div>
+<div class="row">
+<div class="title">İp</div>
+<div id="ip">0</div>
+</div>
+
+<div class="row">
+<div class="title">İp x2</div>
+<div id="ip2">0</div>
+</div>
+
+</div>
+
+<div id="kesim">
+
+<h2>KESİM LİSTESİ</h2>
+
+<div class="kesimSatir">
+<div>YATAY</div>
+<div id="yatay"></div>
+</div>
+
+<div class="kesimSatir">
+<div>DİKEY</div>
+<div id="dikey"></div>
+</div>
+
+<div class="kesimSatir">
+<div>KANAT</div>
+<div id="kKanat"></div>
+</div>
+
+<div class="kesimSatir">
+<div>TÜL</div>
+<div id="kTul"></div>
+</div>
+
+<div class="kesimSatir">
+<div>TEPE</div>
+<div id="kTepe"></div>
+</div>
 
 </div>
 
@@ -92,28 +201,31 @@ HESAPLA
 
 function hesapla(){
 
-let en=parseFloat(document.getElementById("en").value)||0;
+const en=Number(document.getElementById("en").value);
+const boy=Number(document.getElementById("boy").value);
 
-let boy=parseFloat(document.getElementById("boy").value)||0;
+const en80=en-80;
+const boy80=boy-80;
 
-document.getElementById("kanat").innerHTML=boy-80;
+document.getElementById("kanat").innerText=boy80+" mm";
+document.getElementById("tul").innerText=(boy-65)+" mm";
+document.getElementById("tepe").innerText=(en/30).toFixed(2);
+document.getElementById("en80").innerText=en80+" mm";
+document.getElementById("boy80").innerText=boy80+" mm";
+document.getElementById("ip").innerText=(en+boy)+" mm";
+document.getElementById("ip2").innerText=((en+boy)*2)+" mm";
 
-document.getElementById("tul").innerHTML=boy-65;
+document.getElementById("yatay").innerText="2 × "+en80+" mm";
+document.getElementById("dikey").innerText="2 × "+boy80+" mm";
+document.getElementById("kKanat").innerText="1 × "+boy80+" mm";
+document.getElementById("kTul").innerText="1 × "+(boy-65)+" mm";
+document.getElementById("kTepe").innerText="3 × "+Math.floor(en/3)+" mm";
 
-document.getElementById("tepe").innerHTML=(en/30).toFixed(2);
-
-document.getElementById("en80").innerHTML=en-80;
-
-document.getElementById("boy80").innerHTML=boy-80;
-
-document.getElementById("ip").innerHTML=en+boy;
-
-document.getElementById("ip2").innerHTML=(en+boy)*2;
+document.getElementById("kesim").style.display="block";
 
 }
 
 </script>
 
 </body>
-
 </html>
